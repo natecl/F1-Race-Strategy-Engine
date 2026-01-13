@@ -91,3 +91,21 @@ print(
     .head(10)
 )
 
+#Selects only the data for Verstappen
+driver = "VER"
+laps_driver = laps_clean[laps_clean["Driver"] == driver].copy()
+
+out = (
+    laps_driver[["LapNumber", "Compound", "LapTime", "Stint_lap", "TrackStatus", "Position", "gap_ahead"]]
+    .rename(columns={
+         "LapNumber": "lap",
+        "Compound": "compound",
+        "LapTime": "lap_time",
+        "TrackStatus": "track_status",
+        "Position": "position",
+    })
+    .sort_values(by = "lap")
+)
+
+print(out.head(20).to_string(index=False))
+
